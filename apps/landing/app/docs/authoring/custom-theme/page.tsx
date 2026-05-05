@@ -99,20 +99,21 @@ const safeAccent = hl.ensureContrast('#FF6B35', '#0a0a0a', 4.5)
         For teams running multiple CLIs that should share a brand, ship the
         theme as a plain object from your shared package:
       </p>
-      <CodeBlock filename="@acme/cli-theme/index.ts">{`import type { PartialTheme } from '@caret/registry'
-
-export const acmeTheme: PartialTheme = {
+      <CodeBlock filename="@acme/cli-theme/index.ts">{`// Shared theme — pure data, no Caret import.
+// Each consuming CLI keeps its own copy of Caret in ./caret/.
+export const acmeTheme = {
   colors: {
     accent: { default: '#FF6B35' },
   },
   motion: {
     duration: { default: 180 },
   },
-}`}</CodeBlock>
+} as const`}</CodeBlock>
       <CodeBlock filename="apps/billing-cli/src/index.ts">{`import { acmeTheme } from '@acme/cli-theme'
-import { caret } from './caret'
+import type { PartialTheme } from '../caret/theme/types.js'
+import { caret } from '../caret/index.js'
 
-caret.theme.set(acmeTheme)`}</CodeBlock>
+caret.theme.set(acmeTheme satisfies PartialTheme)`}</CodeBlock>
 
       <h2 id="next">Next</h2>
       <p>

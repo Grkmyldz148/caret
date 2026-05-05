@@ -163,8 +163,8 @@ a[href^="http"]:on-click {
 
 /* Theme toggle + küçük icon butonlar — bandpass'lı tick "state değişti"
    olarak okunur, "komut yollandı" olarak değil. */
-[aria-label="Toggle theme"],
-[aria-label="Toggle theme"]:on-click,
+[aria-label^="Switch to"],
+[aria-label^="Switch to"]:on-click,
 button[data-toggle],
 button[data-toggle]:on-click {
   sound-on-click: caret-tick;

@@ -9,7 +9,7 @@ const LINKS = [
   { label: 'Docs', href: '/docs' },
   { label: 'Components', href: '/components' },
   { label: 'Spec', href: '/spec' },
-  { label: 'GitHub', href: '#' },
+  { label: 'GitHub', href: 'https://github.com/Grkmyldz148/caret' },
 ] as const
 
 /**

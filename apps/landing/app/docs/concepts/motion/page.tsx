@@ -77,7 +77,7 @@ export default function MotionPage() {
         curves used internally. Custom components are encouraged to consume
         them rather than inline cubic-bezier strings.
       </p>
-      <CodeBlock language="ts">{`import { easing } from '@caret/registry'
+      <CodeBlock language="ts">{`import { easing } from '../caret/lib/motion.js'
 
 easing.linear     // (t) => t
 easing.easeOut    // (t) => 1 - Math.pow(1 - t, 3)
@@ -89,7 +89,7 @@ easing.easeInOut  // smoothstep`}</CodeBlock>
         <code>setInterval</code> with reduced-motion gating and a clean
         cancel signature.
       </p>
-      <CodeBlock language="ts">{`import { frameLoop } from '@caret/registry'
+      <CodeBlock language="ts">{`import { frameLoop } from '../caret/lib/motion.js'
 
 const cancel = frameLoop(80, (frame) => {
   // 80ms ticks. Returns false to stop, anything else to continue.

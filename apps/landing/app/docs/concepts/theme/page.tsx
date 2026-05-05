@@ -24,12 +24,13 @@ export default function ThemePage() {
 
       <h2 id="default">The default theme</h2>
       <p>
-        <code>defaultTheme</code> is exported from <code>@caret/registry</code>{' '}
-        and ships with sensible values for every token. You almost never read
-        it directly — you call <code>useTheme()</code> inside an Ink component
-        or rely on Caret's components doing the lookup for you.
+        <code>defaultTheme</code> lands in your project after{' '}
+        <code>npx caret add theme</code> — the file at{' '}
+        <code>caret/theme/default.ts</code> exports it. You almost never read
+        it directly: call <code>useTheme()</code> inside an Ink component or
+        rely on Caret's components doing the lookup for you.
       </p>
-      <CodeBlock language="ts">{`import { defaultTheme } from '@caret/registry'
+      <CodeBlock language="ts">{`import { defaultTheme } from '../caret/theme/default.js'
 
 console.log(defaultTheme.colors.accent.default)  // '#5882f7'
 console.log(defaultTheme.motion.duration.default) // 200`}</CodeBlock>
@@ -60,7 +61,7 @@ caret.theme.set({
         For React-tree scoped overrides — useful when one section of a CLI
         needs a different palette without affecting the rest.
       </p>
-      <CodeBlock language="tsx">{`import { ThemeProvider } from '@caret/registry'
+      <CodeBlock language="tsx">{`import { ThemeProvider } from '../caret/theme/context.js'
 
 function DangerZone() {
   return (

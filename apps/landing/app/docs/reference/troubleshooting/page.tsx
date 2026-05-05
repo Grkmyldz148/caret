@@ -127,9 +127,10 @@ try {
 
       <h3 id="setTheme-typecheck">PartialTheme typing complains</h3>
       <p>
-        Ensure you import <code>PartialTheme</code> from{' '}
-        <code>@caret/registry</code> (or your local copy) and not the full{' '}
-        <code>Theme</code>. PartialTheme makes every leaf optional.
+        Ensure you import <code>PartialTheme</code> from your local copy at{' '}
+        <code>caret/theme/types.ts</code> (it lands there after{' '}
+        <code>npx caret add theme</code>) and not the full <code>Theme</code>.
+        PartialTheme makes every leaf optional.
       </p>
 
       <h2 id="ai-issues">AI assistants generate non-Caret code</h2>

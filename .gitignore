@@ -18,6 +18,10 @@ coverage/
 *.caret-cache.txt
 **/.*.caret-cache.txt
 
+# Locally-installed Claude Code skills (npx skills add) — not part of
+# this repo. Each developer manages their own skill set.
+.agents/
+
 # `prepack` copies the workspace registry + README + LICENSE into
 # packages/caret/ for the published tarball — never commit those copies.
 packages/caret/registry/

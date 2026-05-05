@@ -71,7 +71,7 @@ export function Cta() {
         </button>
 
         <a
-          href="#"
+          href="/spec"
           className="text-muted text-sm border-b border-transparent hover:border-muted hover:text-fg transition-all pb-0.5"
         >
           Read the manifesto →

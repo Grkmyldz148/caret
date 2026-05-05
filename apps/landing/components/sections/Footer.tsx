@@ -3,15 +3,41 @@ import { CaretMark } from '@/components/CaretMark'
 const COLUMNS = [
   {
     heading: 'System',
-    links: ['Components', 'Tokens', 'Spec'],
+    links: [
+      { label: 'Components', href: '/components' },
+      { label: 'Spec', href: '/spec' },
+      { label: 'Docs', href: '/docs' },
+    ],
   },
   {
     heading: 'Resources',
-    links: ['Documentation', 'GitHub', 'Changelog', 'Roadmap'],
+    links: [
+      {
+        label: 'GitHub',
+        href: 'https://github.com/Grkmyldz148/caret',
+        external: true,
+      },
+      {
+        label: 'caret-cli on npm',
+        href: 'https://www.npmjs.com/package/caret-cli',
+        external: true,
+      },
+      {
+        label: 'Changelog',
+        href: 'https://github.com/Grkmyldz148/caret/blob/main/packages/caret/CHANGELOG.md',
+        external: true,
+      },
+    ],
   },
   {
-    heading: 'Community',
-    links: ['Discord', 'X (Twitter)', 'Bluesky'],
+    heading: 'Skills',
+    links: [
+      {
+        label: 'caret-skills',
+        href: 'https://github.com/Grkmyldz148/caret-skills',
+        external: true,
+      },
+    ],
   },
 ] as const
 
@@ -57,8 +83,14 @@ export function Footer() {
               {col.heading}
             </h4>
             {col.links.map((l) => (
-              <a key={l} href="#" className="hover:text-fg transition-colors">
-                {l}
+              <a
+                key={l.label}
+                href={l.href}
+                target={'external' in l && l.external ? '_blank' : undefined}
+                rel={'external' in l && l.external ? 'noopener noreferrer' : undefined}
+                className="hover:text-fg transition-colors"
+              >
+                {l.label}
               </a>
             ))}
           </div>
