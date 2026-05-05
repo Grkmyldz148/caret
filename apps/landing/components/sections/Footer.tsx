@@ -43,15 +43,20 @@ const COLUMNS = [
 
 export function Footer() {
   return (
-    <footer className="hairline-t pt-16 pb-8 px-6 lg:px-12 text-sm text-muted">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+    <footer
+      className="hairline-t pt-16 px-6 lg:px-12 text-sm text-muted"
+      style={{
+        paddingBottom: 'max(2rem, env(safe-area-inset-bottom, 2rem))',
+      }}
+    >
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-12 mb-12 md:mb-16">
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-2.5 text-fg">
             <CaretMark className="text-accent" size={20} />
             <span className="font-medium tracking-tight">Caret</span>
           </div>
           <p className="text-xs leading-relaxed max-w-[220px]">
-            The copy-paste design system for modern command-line tools.
+            A design system for modern command-line tools. In active design.
           </p>
           <p className="mt-4 font-mono text-[10px] text-subtle uppercase tracking-[0.2em]">
             Color system powered by{' '}
@@ -97,8 +102,18 @@ export function Footer() {
         ))}
       </div>
 
-      <div className="max-w-7xl mx-auto hairline-t pt-8 flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-xs">
-        <p>Caret is in active design. Nothing is released yet.</p>
+      <div className="max-w-7xl mx-auto hairline-t pt-6 md:pt-8 flex flex-col md:flex-row items-center justify-between gap-2 md:gap-3 font-mono text-[11px] md:text-xs text-center md:text-left">
+        <p>
+          Made by{' '}
+          <a
+            href="https://gorkemyildiz.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-fg hover:text-accent transition-colors"
+          >
+            Görkem Yıldız
+          </a>
+        </p>
         <p className="flex items-center gap-4">
           <span>MIT License</span>
           <span className="text-hairline-strong">·</span>

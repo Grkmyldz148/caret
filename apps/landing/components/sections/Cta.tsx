@@ -1,7 +1,6 @@
 'use client'
 
 import { useRef } from 'react'
-import { symbols } from '@/lib/tokens'
 
 const COMMAND = 'npx caret init my-cli'
 
@@ -71,15 +70,13 @@ export function Cta() {
         </button>
 
         <a
-          href="/spec"
+          href="https://github.com/Grkmyldz148/caret#principles"
+          target="_blank"
+          rel="noopener noreferrer"
           className="text-muted text-sm border-b border-transparent hover:border-muted hover:text-fg transition-all pb-0.5"
         >
           Read the manifesto →
         </a>
-      </div>
-
-      <div className="pt-12 font-mono text-[10px] text-subtle uppercase tracking-[0.2em]">
-        {symbols.anchor} caret is in active design
       </div>
     </section>
   )

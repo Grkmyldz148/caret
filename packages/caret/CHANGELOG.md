@@ -5,6 +5,24 @@ follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). The
 project adheres to [Semantic Versioning](https://semver.org/) once it
 exits the `0.x` band.
 
+## [0.1.0] — 2026-05-05
+
+### Changed
+- Promoted from `alpha` to **stable** under SemVer 0.x. The 0.x band
+  itself is the "API may break across minor versions" signal — the
+  extra prerelease tag was redundant and made the package feel less
+  ready than it is.
+- Default `dist-tag` is now `latest` (a plain `npm i caret-cli`
+  installs 0.1.0). The `alpha` tag still resolves to 0.1.0-alpha.1
+  for anyone who pinned to it.
+
+### Note on stability
+0.1.0 ships the same code as 0.1.0-alpha.1 — `init`, `add`, `list`
+all verified end-to-end. SemVer 0.x means breaking changes can land
+in 0.2.0 without violating semver; the registry's component API and
+manifesto are the parts most likely to evolve as real users report
+back. Pin to `~0.1.0` if you want patch-only updates.
+
 ## [0.1.0-alpha.1] — 2026-05-05
 
 ### Fixed
@@ -41,5 +59,6 @@ exits the `0.x` band.
 - `bin: { caret: ./dist/index.js }` — installable globally or
   invokable via `npx caret-cli@alpha <command>`.
 
-[0.1.0-alpha.1]: https://github.com/Grkmyldz148/caret-cli/releases/tag/v0.1.0-alpha.1
-[0.1.0-alpha.0]: https://github.com/Grkmyldz148/caret-cli/releases/tag/v0.1.0-alpha.0
+[0.1.0]: https://github.com/Grkmyldz148/caret/releases/tag/v0.1.0
+[0.1.0-alpha.1]: https://github.com/Grkmyldz148/caret/releases/tag/v0.1.0-alpha.1
+[0.1.0-alpha.0]: https://github.com/Grkmyldz148/caret/releases/tag/v0.1.0-alpha.0

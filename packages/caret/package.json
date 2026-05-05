@@ -1,6 +1,6 @@
 {
   "name": "caret-cli",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0",
   "description": "The design system for modern command-line tools",
   "type": "module",
   "license": "MIT",

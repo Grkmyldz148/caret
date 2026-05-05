@@ -1,21 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Caret">
   <title>Caret</title>
-  <style>
-    /*
-     * Theme-aware favicon. Browsers strip class attributes when
-     * caching the icon, but inline <style> with prefers-color-scheme
-     * is honoured by Chrome, Safari, and Firefox.
-     *
-     * Light browser/tab → dark stroke (Caret fg).
-     * Dark  browser/tab → light stroke (Caret canvas-fg).
-     * The brand accent could go here instead, but the chevron is
-     * easier to read at 16×16 in a single high-contrast tone.
-     */
-    path { stroke: #0a0a0a; }
-    @media (prefers-color-scheme: dark) {
-      path { stroke: #ededed; }
-    }
-  </style>
-  <path d="M14 32 L32 14 L50 32" fill="none" stroke-width="5" stroke-linejoin="miter" stroke-miterlimit="3" stroke-linecap="square"/>
-  <path d="M14 50 L50 50" fill="none" stroke-width="5" stroke-linecap="square"/>
+  <!--
+    Filled brand-accent tile with a white chevron + base line glyph.
+    The previous outline-only mark vanished at 16×16 tab size against
+    both light and dark Chrome chrome — too thin to read. A filled
+    square renders as a recognisable coloured chip in any tab strip
+    regardless of the user's OS theme, so the inline @media
+    prefers-color-scheme override that the outline version needed
+    is no longer required.
+  -->
+  <rect x="0" y="0" width="64" height="64" rx="14" fill="#5882f7"/>
+  <path
+    d="M14 36 L32 18 L50 36"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="7"
+    stroke-linejoin="miter"
+    stroke-miterlimit="3"
+    stroke-linecap="square"
+  />
+  <path
+    d="M14 50 L50 50"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="7"
+    stroke-linecap="square"
+  />
 </svg>

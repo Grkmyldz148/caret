@@ -1,0 +1,55 @@
+# Caret
+
+> A design system for modern command-line tools. Caret is to terminals what shadcn/ui is to the web: copy-paste components, a token system, and a manifesto that lets a CLI ship looking like Vercel or Linear built it. Distributed as `caret-cli` on npm — `npx caret-cli init` scaffolds a project, `npx caret-cli add <component>` copies one of 51 components into `./caret/`. Components are React + Ink, manifesto-checked: NO_COLOR-aware, capability fallbacks, no terminal bell, semantic colors, symbols sourced from a token registry.
+
+## Installation
+
+- [Quick start](https://caretcli.com/docs): `npx caret-cli init my-cli` then `npx caret-cli add prompt`
+- [Install](https://caretcli.com/docs/install): supported runtimes, dependency model
+- [First CLI](https://caretcli.com/docs/first-cli): build a deploy CLI from scratch in five steps
+- [How it works](https://caretcli.com/docs/how-it-works): copy-paste registry model, file ownership, no runtime dependency
+
+## Concepts
+
+- [Principles](https://caretcli.com/docs/concepts/principles): the manifesto — eight rules every Caret component obeys
+- [Theme](https://caretcli.com/docs/concepts/theme): token override surfaces (set, ThemeProvider, per-call)
+- [Tokens](https://caretcli.com/docs/concepts/tokens): colors, symbols, spacing, typography, motion
+- [Symbols](https://caretcli.com/docs/concepts/symbols): unicode glyphs with ASCII fallbacks for every state
+- [Motion](https://caretcli.com/docs/concepts/motion): easing curves, frameLoop, reduced-motion handling
+- [Capability](https://caretcli.com/docs/concepts/capability): truecolor / 256 / 16 / mono fallback model
+
+## CLI reference
+
+- [caret init](https://caretcli.com/docs/cli/init): scaffold a TypeScript CLI project with caret.md AI-instructions
+- [caret add](https://caretcli.com/docs/cli/add): copy components from the registry into `./caret/components/<name>/`
+- [caret list](https://caretcli.com/docs/cli/list): browse the catalog by kind (interactive, display, utility)
+
+## Authoring
+
+- [Custom theme](https://caretcli.com/docs/authoring/custom-theme): derive a brand palette, ship as PartialTheme
+- [Porting from chalk/ora/inquirer](https://caretcli.com/docs/authoring/porting): migration recipes
+- [AI-native workflows](https://caretcli.com/docs/authoring/ai-native): caret.md + caret-skills plugin
+
+## Components
+
+- [Component catalog](https://caretcli.com/components): live previews of all 51 components
+- [Component specs](https://caretcli.com/spec): full markdown spec for each — props, manifesto compliance, examples
+
+## Skills (AI plugins)
+
+- [caret-skills repo](https://github.com/Grkmyldz148/caret-skills): two Claude Code / Cursor / 50+ runtime skills
+- `/create-caret-component`: author one Caret component end-to-end (tokens, render, capability fallbacks, test)
+- `/caret-cli-design`: read an existing CLI repo, output an adoption plan with the exact `caret-cli add` sequence
+
+## Reference
+
+- [FAQ](https://caretcli.com/docs/reference/faq)
+- [Troubleshooting](https://caretcli.com/docs/reference/troubleshooting)
+- [GitHub repo](https://github.com/Grkmyldz148/caret) — monorepo: `packages/caret/` (CLI source), `registry/` (components), `apps/landing/` (this site), `specs/` (markdown specs)
+- [npm package](https://www.npmjs.com/package/caret-cli) — `caret-cli@0.1.0`
+- [Changelog](https://github.com/Grkmyldz148/caret/blob/main/packages/caret/CHANGELOG.md)
+
+## Optional
+
+- [Helmlab](https://helmlab.space): GenSpace color science library powering Caret's token system
+- [ACS — Audio Cascading Style Sheets](https://www.audiocss.dev): the runtime that drives the landing site's sound layer

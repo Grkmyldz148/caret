@@ -53,7 +53,9 @@ export function Hero() {
 
         <div className="flex items-center gap-3 pt-1">
           <a
-            href="#cta"
+            href="https://www.npmjs.com/package/caret-cli"
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-fg text-canvas px-5 py-2.5 font-medium text-sm rounded-md hover:opacity-90 transition-opacity"
           >
             Get started

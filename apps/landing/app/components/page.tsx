@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Nav } from '@/components/sections/Nav'
 import { Footer } from '@/components/sections/Footer'
+import { ComponentsSearch } from '@/components/ComponentsSearch'
 import {
   CATALOG,
   CATEGORIES,
@@ -40,7 +41,7 @@ export default function ComponentsPage() {
 
   return (
     <>
-      <Nav />
+      <Nav search={<ComponentsSearch />} />
 
       <main className="w-full max-w-7xl mx-auto px-6 lg:px-12">
         {/* Header */}

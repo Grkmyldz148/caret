@@ -68,7 +68,7 @@ export const metadata: Metadata = {
   title: 'Caret — The design system for modern command-line tools',
   description:
     'Caret is to terminals what shadcn/ui is to the web. Copy-paste components, a token system, and a spec — so your CLI ships looking like Vercel or Linear built it.',
-  metadataBase: new URL('https://caret.dev'),
+  metadataBase: new URL('https://caretcli.com'),
   icons: {
     icon: [{ url: '/logo-mark.svg', type: 'image/svg+xml' }],
     shortcut: '/logo-mark.svg',
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     title: 'Caret — The design system for modern command-line tools',
     description:
       'Copy-paste components and a token system for beautiful CLIs.',
-    url: 'https://caret.dev',
+    url: 'https://caretcli.com',
     siteName: 'Caret',
     type: 'website',
   },
