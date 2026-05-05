@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "acs-soundscape": {
+      "source": "Grkmyldz148/acs-skills",
+      "sourceType": "github",
+      "skillPath": "acs-soundscape/SKILL.md",
+      "computedHash": "05944b980f91d17730545cb961a2716319de4919ec5530d48122fe6b97976253"
+    },
+    "create-acs-sound": {
+      "source": "Grkmyldz148/acs-skills",
+      "sourceType": "github",
+      "skillPath": "create-acs-sound/SKILL.md",
+      "computedHash": "eea8dce245e353a5ad628d64c51782e79f1f9dc1fd218d42b1ea30ac6a31cf0c"
+    }
+  }
+}

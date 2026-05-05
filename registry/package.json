@@ -1,0 +1,29 @@
+{
+  "name": "@caret/registry",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Caret component source files. Copied into user projects by `caret add`.",
+  "type": "module",
+  "main": "./index.ts",
+  "license": "MIT",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "figlet": "^1.7.0",
+    "ink": "^5.0.1",
+    "jimp": "^1.6.0",
+    "qrcode": "^1.5.4",
+    "react": "^18.3.1",
+    "unicode-animations": "^1.0.3"
+  },
+  "devDependencies": {
+    "@types/figlet": "^1.5.8",
+    "@types/node": "^22.0.0",
+    "@types/qrcode": "^1.5.6",
+    "@types/react": "^18.3.3",
+    "ink-testing-library": "^4.0.0",
+    "typescript": "^5.6.0"
+  }
+}

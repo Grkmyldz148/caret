@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Caret">
+  <title>Caret</title>
+  <style>
+    /*
+     * Theme-aware favicon. Browsers strip class attributes when
+     * caching the icon, but inline <style> with prefers-color-scheme
+     * is honoured by Chrome, Safari, and Firefox.
+     *
+     * Light browser/tab → dark stroke (Caret fg).
+     * Dark  browser/tab → light stroke (Caret canvas-fg).
+     * The brand accent could go here instead, but the chevron is
+     * easier to read at 16×16 in a single high-contrast tone.
+     */
+    path { stroke: #0a0a0a; }
+    @media (prefers-color-scheme: dark) {
+      path { stroke: #ededed; }
+    }
+  </style>
+  <path d="M14 32 L32 14 L50 32" fill="none" stroke-width="5" stroke-linejoin="miter" stroke-miterlimit="3" stroke-linecap="square"/>
+  <path d="M14 50 L50 50" fill="none" stroke-width="5" stroke-linecap="square"/>
+</svg>

@@ -1,0 +1,346 @@
+@import 'tailwindcss';
+
+/* === Caret design tokens =============================================
+ *
+ * Authored in Helmlab GenSpace and compiled by postcss-helmlab into
+ * an sRGB rgb() base plus an @supports-wrapped color(display-p3 …)
+ * override for wide-gamut displays. GenSpace (not MetricSpace) is
+ * used because:
+ *   - it's tuned for gradient/palette generation (60-8 wins vs OKLab
+ *     on ColorBench, 360/360/360 valid gamut cusps, zero monotonicity
+ *     violations);
+ *   - when two tokens are interpolated via
+ *       linear-gradient(in helmgen, var(--a), var(--b))
+ *     or color-mix(in helmgen, …), both endpoints living in GenSpace
+ *     means the in-betweens stay perceptually monotonic.
+ *
+ * Three families of tokens are defined:
+ *
+ *   - Surface neutrals (canvas / surface / hairline / fg / muted /
+ *     subtle) — light AND dark variants. The light variant is the
+ *     L-axis mirror of the dark one. Toggled via [data-theme].
+ *
+ *   - Brand + semantic (accent / success / warning / danger / info) —
+ *     same value in both themes. Caret's manifesto says the brand
+ *     accent is truecolor and fixed.
+ *
+ *   - Terminal surfaces (terminal-canvas / terminal-fg / etc.) —
+ *     always dark, regardless of the page theme. The hero's
+ *     TerminalWindow, the deploy.ts code panel, and the component
+ *     preview cards all keep their terminal look in light mode.
+ * =================================================================== */
+
+@theme {
+  /* ── Surface neutrals — DARK defaults. Mirrored under data-theme. */
+  --color-canvas:            helmgenlch(0.0254 0      0);
+  --color-surface:           helmgenlch(0.0493 0      0);
+  --color-hairline:          helmgenlch(0.1185 0      0);
+  --color-hairline-strong:   helmgenlch(0.1737 0      0);
+  --color-fg:                helmgenlch(0.9406 0      0);
+  --color-muted:             helmgenlch(0.5696 0      0);
+  --color-subtle:            helmgenlch(0.3803 0      0);
+
+  /* ── Brand + semantic — fixed across themes. */
+  --color-accent:            helmgenlch(0.5727 0.2888 268.78);
+  --color-accent-muted:      helmgenlch(0.4261 0.237  265.13);
+  --color-accent-emphasized: helmgenlch(0.6644 0.2381 270.88);
+
+  --color-success:           helmgenlch(0.6661 0.2263 143.97);
+  --color-warning:           helmgenlch(0.7294 0.2412  81.26);
+  --color-danger:            helmgenlch(0.5558 0.2719  35.53);
+  --color-info:              helmgenlch(0.6172 0.1749 253.26);
+
+  /* Translucent canvas — used by the sticky Nav over scrolled content.
+     Stored as a pre-baked rgb()/alpha pair so the value survives
+     postcss-helmlab's color-mix / var() resolver (which would otherwise
+     inline the var at build time and break theme switching). */
+  --color-canvas-translucent: rgb(10 10 10 / 0.8);
+
+  /* ── Terminal surfaces — always dark, used on the hero
+        TerminalWindow, code panel, and component preview cards. */
+  --color-terminal-canvas:           helmgenlch(0.0254 0      0);
+  --color-terminal-surface:          helmgenlch(0.0493 0      0);
+  --color-terminal-hairline:         helmgenlch(0.1185 0      0);
+  --color-terminal-hairline-strong:  helmgenlch(0.1737 0      0);
+  --color-terminal-fg:               helmgenlch(0.9406 0      0);
+  --color-terminal-muted:            helmgenlch(0.5696 0      0);
+  --color-terminal-subtle:           helmgenlch(0.3803 0      0);
+  --color-terminal-accent:           helmgenlch(0.5727 0.2888 268.78);
+  --color-terminal-success:          helmgenlch(0.6661 0.2263 143.97);
+  --color-terminal-warning:          helmgenlch(0.7294 0.2412  81.26);
+  --color-terminal-danger:           helmgenlch(0.5558 0.2719  35.53);
+
+  /* === Typography =====
+   *
+   * next/font loads Inter and JetBrains Mono under generated family
+   * names and exposes them via `--font-inter-loaded` / `--font-mono-loaded`
+   * on the <html> element (see app/layout.tsx). Reference those here
+   * so Tailwind's `font-sans` / `font-mono` utilities and the `.term`
+   * surface use the actually loaded face — not a literal
+   * `'JetBrains Mono'` string that the browser cannot match, which
+   * would silently fall back to system mono and render box-drawing
+   * characters (│ ├ └ ─) at subtly different widths.
+   */
+  --font-sans: var(--font-inter-loaded), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-loaded), ui-monospace, 'SFMono-Regular', Menlo,
+    Consolas, monospace;
+
+  --tracking-tightest: -0.04em;
+}
+
+/* Light theme — only the surface neutrals are remapped. Their L
+   coordinates are the dark values mirrored across L=0.5 (1 − L), so
+   the perceptual relationship between fg/muted/subtle/canvas is
+   preserved, just inverted in lightness. */
+:root[data-theme='light'] {
+  --color-canvas:          helmgenlch(0.9746 0 0);   /* 1 − 0.0254 */
+  --color-surface:         helmgenlch(0.9507 0 0);   /* 1 − 0.0493 */
+  --color-hairline:        helmgenlch(0.8815 0 0);   /* 1 − 0.1185 */
+  --color-hairline-strong: helmgenlch(0.8263 0 0);   /* 1 − 0.1737 */
+  --color-fg:              helmgenlch(0.0594 0 0);   /* 1 − 0.9406 */
+  --color-muted:           helmgenlch(0.4304 0 0);   /* 1 − 0.5696 */
+  --color-subtle:          helmgenlch(0.6197 0 0);   /* 1 − 0.3803 */
+
+  /* Light-theme translucent canvas — same trick as dark, just inverted. */
+  --color-canvas-translucent: rgb(247 247 247 / 0.8);
+}
+
+@layer base {
+  html {
+    background-color: var(--color-canvas);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    /* Ease the surface and text colors when the theme toggle fires —
+       too short and it flashes; too long and it lags scroll. */
+    transition:
+      background-color 180ms ease,
+      color 180ms ease;
+  }
+
+  body {
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-canvas);
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-canvas);
+    border-left: 1px solid var(--color-hairline);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-hairline);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-hairline-strong);
+  }
+}
+
+@layer utilities {
+  .hairline-t {
+    border-top: 1px solid var(--color-hairline);
+  }
+  .hairline-b {
+    border-bottom: 1px solid var(--color-hairline);
+  }
+
+  /* Sticky-nav surface — translucent canvas over scrolled content.
+     Reads from `--color-canvas-translucent`, a pre-baked rgb()/alpha
+     pair that the theme block defines per-theme. Tailwind v4's
+     `bg-canvas/80` modifier and a color-mix(in oklab, var(--c)…)
+     workaround both fail here: the first hard-codes the resolved
+     rgb in its fallback path, the second is inlined by the helmlab
+     plugin. A plain alpha-encoded variable survives both. */
+  .surface-translucent {
+    background-color: var(--color-canvas-translucent);
+  }
+
+  /* Monospace terminal surface — the canonical Caret character cell.
+     Always dark, even in light mode.
+
+     The neutral tokens (canvas / surface / hairline / fg / muted /
+     subtle) are rebound inside .term so that any child using
+     `text-fg`, `bg-surface`, etc. resolves to the terminal palette
+     instead of the active page palette. Brand + semantic colors
+     (accent / success / warning / danger / info) stay fixed across
+     themes already, so they don't need to be rebound. */
+  .term {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.55;
+    font-variant-ligatures: none;
+    font-feature-settings: 'liga' 0, 'calt' 0;
+    white-space: pre;
+    tab-size: 4;
+
+    --color-canvas: var(--color-terminal-canvas);
+    --color-surface: var(--color-terminal-surface);
+    --color-hairline: var(--color-terminal-hairline);
+    --color-hairline-strong: var(--color-terminal-hairline-strong);
+    --color-fg: var(--color-terminal-fg);
+    --color-muted: var(--color-terminal-muted);
+    --color-subtle: var(--color-terminal-subtle);
+  }
+
+  .term-sm {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.55;
+    font-variant-ligatures: none;
+    font-feature-settings: 'liga' 0, 'calt' 0;
+    white-space: pre;
+  }
+
+  /* ANSI `dim` — Caret's muted tier */
+  .dim {
+    color: var(--color-muted);
+  }
+
+  /* Inverse cursor cell — mirrors Ink's <Text inverse> */
+  .cursor-cell {
+    background-color: var(--color-fg);
+    color: var(--color-canvas);
+    display: inline-block;
+    width: 1ch;
+  }
+
+  /* Blinking block cursor ▎ */
+  @keyframes caret-blink {
+    0%,
+    49% {
+      opacity: 1;
+    }
+    50%,
+    100% {
+      opacity: 0;
+    }
+  }
+  .caret-blink {
+    animation: caret-blink 1.05s steps(1) infinite;
+  }
+
+  /*
+   * TerminalStage — the single wrapper used to preview Caret components
+   * on the landing site. It owns two responsibilities and nothing else:
+   *
+   *   1. Clip overflow so a wide character grid never pushes neighbors
+   *      around in the grid layouts above it.
+   *   2. Let the inner Terminal keep its intrinsic monospace width so
+   *      character-cell alignment is preserved. We never wrap or shrink
+   *      the text — Caret components assume a true grid.
+   */
+  .terminal-stage {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .terminal-stage-inner {
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    margin-inline: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .terminal-stage .spinner-braille::before,
+    .terminal-stage .caret-blink {
+      animation: none !important;
+    }
+  }
+
+  /* Hover-only scrollbar — used by docs / spec sidebars where a
+     persistent scrollbar competes with the navigation list. The
+     thumb is transparent in resting state; both the container's
+     :hover and the thumb's own :hover bring it back. Works in
+     WebKit (custom pseudo-elements) and Firefox (scrollbar-color). */
+  .scroll-fade {
+    scrollbar-color: transparent transparent;
+    transition: scrollbar-color 200ms ease;
+  }
+  .scroll-fade:hover,
+  .scroll-fade:focus-within {
+    scrollbar-color: var(--color-hairline-strong) transparent;
+  }
+  .scroll-fade::-webkit-scrollbar-track {
+    background: transparent;
+    border: 0;
+  }
+  .scroll-fade::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 4px;
+    transition: background-color 200ms ease;
+  }
+  .scroll-fade:hover::-webkit-scrollbar-thumb,
+  .scroll-fade:focus-within::-webkit-scrollbar-thumb,
+  .scroll-fade::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-hairline-strong);
+  }
+
+  /* Toast — bottom-center, slide-up + fade pair. Used by ToastHost
+     to surface async confirmations like "Copied to clipboard". */
+  @keyframes caret-toast-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes caret-toast-out {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+  }
+  .caret-toast-enter {
+    animation: caret-toast-in 220ms cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  }
+  .caret-toast-leave {
+    animation: caret-toast-out 180ms ease-in both;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .caret-toast-enter,
+    .caret-toast-leave {
+      animation: none !important;
+    }
+  }
+
+  /* Spinner braille rotation — 10 frames @ 80ms = 800ms loop */
+  @keyframes spinner-frames {
+    0% { content: '⠋'; }
+    10% { content: '⠙'; }
+    20% { content: '⠹'; }
+    30% { content: '⠸'; }
+    40% { content: '⠼'; }
+    50% { content: '⠴'; }
+    60% { content: '⠦'; }
+    70% { content: '⠧'; }
+    80% { content: '⠇'; }
+    90% { content: '⠏'; }
+    100% { content: '⠋'; }
+  }
+  .spinner-braille::before {
+    content: '⠋';
+    animation: spinner-frames 0.8s steps(1) infinite;
+    display: inline-block;
+    width: 1ch;
+    text-align: center;
+  }
+}

@@ -1,0 +1,196 @@
+/* Caret landing — ACS soundscape
+ *
+ * "Caret, temiz bir çelik masaya konmuş, iyi ayarlı bir mekanik klavye
+ *  gibi tınlamalı." Tüm preset'ler 1100–1320 Hz aralığında saf sinüs
+ *  gövdelere sahip; üstüne ince, highpass'lı beyaz gürültü kaplaması
+ *  eklenir. Reverb yok — terminaller yankılanmaz. Manifesto terminal
+ *  zilini yasakladığından bu ailede çan, kutlama tonu ya da pop sesi
+ *  bulunmaz. Sadece klavye geri bildirimi.
+ *
+ * Tüm custom @sound'ların paylaştığı özellikler:
+ *   1. gövde frekansı 1100–1320 Hz (accent #5882f7'yle uyumlu serin bant)
+ *   2. attack 0.5–2 ms (mekanik tuş çıtırtısı)
+ *   3. decay 14–60 ms (kuyruk yok)
+ *   4. her gürültü katmanı highpass ≥ 3500 Hz (ince, kuru)
+ *   5. tüm gövdeler sinüs — Caret "varsayılan olarak güzel", gritty değil
+ *
+ * Binding stratejisi: önce geniş seçiciler (`a`, `button`), sonra özel
+ * override'lar. Her sayfada nav + footer + içerik linkleri + buton var,
+ * yani cascade her route'da çalışır — sayfa-spesifik körnokta yok.
+ */
+
+:root {
+  master-volume: 0.85;   /* ince sinüs click'ler için yüksek headroom */
+  room: none;            /* shadow scale = 0 (saf hairlines) → kuru oda */
+}
+
+/* ───────────────────────────────────────────────────────────────────── *
+ * Custom @sound ailesi
+ * ───────────────────────────────────────────────────────────────────── */
+
+@sound caret-hover {
+  /* Hover fısıltısı: ince, highpass'lı beyaz gürültü, 18 ms.
+     Mekanik tuşa basmadan önceki parmak ucu temasının sesi. realtime:
+     true sayesinde bir liste üzerinde gezinirken sıraya girmeden
+     hızlıca tetiklenir. */
+  whisk {
+    noise: white;
+    filter: highpass;
+    cutoff: 4000hz;
+    attack: 0.5ms;
+    decay: 18ms;
+    gain: 0.18;
+    realtime: true;
+  }
+}
+
+@sound caret-thock {
+  /* Ailenin merkez click'i: 1200 Hz lowpass'lı sinüs gövde + üstüne
+     highpass'lı ince gürültü kaplaması. Düşük strok mekanik tuş "thock"u.
+     Toplam 38 ms, kuyruk yok. Caret'i tıklamak — sese çevrilmiş hâli —
+     budur. Tüm ikincil click'lerde cascade override'ları (pitch / volume)
+     ile yeniden kullanılır; bir daha yazılmaz. */
+  body {
+    osc: sine;
+    freq: 1200hz;
+    filter: lowpass;
+    cutoff: 4500hz;
+    attack: 1ms;
+    decay: 38ms;
+    gain: 0.42;
+    realtime: true;
+  }
+  noise {
+    noise: white;
+    filter: highpass;
+    cutoff: 3500hz;
+    attack: 0.5ms;
+    decay: 14ms;
+    gain: 0.16;
+    realtime: true;
+  }
+}
+
+@sound caret-commit {
+  /* Primary-action click: aynı thock şasisi + gövdenin 2.4 katında
+     (3168 Hz) 55 ms süren temiz bir partial. Bu partial accent rengin
+     ses karşılığıdır — yalnızca commit sınıfı click'lerde duyulur.
+     "Komut kabul edildi" gibi okunur. Get started, nav'daki npx pill,
+     ve copy butonları kullanır. */
+  body {
+    osc: sine;
+    freq: 1320hz;
+    attack: 1ms;
+    decay: 42ms;
+    gain: 0.40;
+    realtime: true;
+  }
+  partial {
+    osc: sine;
+    freq: 3168hz;
+    attack: 1ms;
+    decay: 55ms;
+    gain: 0.18;
+  }
+  noise {
+    noise: white;
+    filter: highpass;
+    cutoff: 3500hz;
+    attack: 0.5ms;
+    decay: 14ms;
+    gain: 0.12;
+  }
+}
+
+@sound caret-tick {
+  /* Theme toggle / focus tick: 2200 Hz'te bandpass'lı tek bir triangle.
+     20 ms; thock'tan daha parlak — action-commit değil, state-flip
+     olarak okunur. */
+  tip {
+    osc: triangle;
+    freq: 2200hz;
+    filter: bandpass;
+    cutoff: 2200hz;
+    q: 1.2;
+    attack: 1ms;
+    decay: 20ms;
+    gain: 0.30;
+    realtime: true;
+  }
+}
+
+/* ───────────────────────────────────────────────────────────────────── *
+ * Bindings — geniş seçiciler önce, özel override'lar sonra
+ * ───────────────────────────────────────────────────────────────────── */
+
+/* Tüm interaktif yüzeyler için evrensel click + hover. Volume'lar
+   aşağıda sınıf sınıf ayarlanır; cascade en spesifik eşleşmeyi seçer. */
+a, button {
+  sound-on-enter: caret-hover;
+  sound-on-click: caret-thock;
+  volume: 0.45;
+}
+
+/* Nav + footer chrome — içerik gövdesinin yarım perde altında, böylece
+   navigasyon sayfa içeriğini bastırmaz. */
+nav a,
+nav button,
+footer a,
+footer button {
+  volume: 0.35;
+  pitch: -1st;
+}
+
+/* Primary CTA'lar. Hem Hero'daki "Get started" hem nav'daki npx-init
+   pill'i #cta'yı işaret ediyor — aynı hedef, aynı ses. Chrome detune'u
+   (-1st) burada sıfırlanır: bu anchor content-tier'dır. */
+a[href="#cta"],
+a[href="#cta"]:on-click,
+.btn-primary,
+.btn-primary:on-click {
+  sound-on-click: caret-commit;
+  volume: 0.55;
+  pitch: 0st;
+}
+
+/* External link'ler — sayfa içi action'lardan daha düşük profilli,
+   "siteyi terk etme" hissini iki perde aşağıdan veriyor. */
+a[href^="http"]:on-click {
+  sound: caret-thock;
+  volume: 0.40;
+  pitch: -2st;
+}
+
+/* Theme toggle + küçük icon butonlar — bandpass'lı tick "state değişti"
+   olarak okunur, "komut yollandı" olarak değil. */
+[aria-label="Toggle theme"],
+[aria-label="Toggle theme"]:on-click,
+button[data-toggle],
+button[data-toggle]:on-click {
+  sound-on-click: caret-tick;
+  volume: 0.45;
+}
+
+/* Code block'lardaki copy butonları — bir snippet'i clipboard'a kopyalamak
+   commit sınıfı bir aksiyon gibi hissediyor. */
+button[aria-label^="Copy"],
+button[aria-label^="Copy"]:on-click,
+.code-copy,
+.code-copy:on-click {
+  sound-on-click: caret-commit;
+  volume: 0.55;
+}
+
+
+/* Search trigger / dialog input — ⌘K basıldığında focus tick ile
+   acknowledged hissi. */
+[role="search"] input:on-focus,
+input[type="search"]:on-focus {
+  sound: caret-tick;
+  volume: 0.35;
+}
+
+/* Reduced-sound preference — OS / tarayıcı ayarına saygı. */
+@media (prefers-reduced-sound: reduce) {
+  :root { master-volume: 0; }
+}

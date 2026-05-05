@@ -1,0 +1,49 @@
+{
+  "name": "caret-cli",
+  "version": "0.1.0-alpha.1",
+  "description": "The design system for modern command-line tools",
+  "type": "module",
+  "license": "MIT",
+  "author": "Görkem Yıldız",
+  "homepage": "https://caret.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Grkmyldz148/caret",
+    "directory": "packages/caret"
+  },
+  "keywords": [
+    "cli",
+    "design-system",
+    "terminal",
+    "ink",
+    "shadcn",
+    "transactional",
+    "prompt",
+    "spinner"
+  ],
+  "bin": {
+    "caret": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "files": [
+    "dist",
+    "registry",
+    "logo.txt",
+    "logo.svg",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "typecheck": "tsc --noEmit",
+    "prepack": "node scripts/prepack.cjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0"
+  }
+}

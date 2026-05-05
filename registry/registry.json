@@ -1,0 +1,504 @@
+{
+  "$schema": "https://caret.dev/schema/registry.json",
+  "version": "0.0.0",
+  "components": {
+    "prompt": {
+      "name": "prompt",
+      "kind": "interactive",
+      "description": "text, password, confirm, select, multi-select, number",
+      "spec": "specs/prompt.md",
+      "files": [
+        "registry/components/prompt/index.tsx",
+        "registry/components/prompt/shared.tsx",
+        "registry/components/prompt/text.tsx",
+        "registry/components/prompt/password.tsx",
+        "registry/components/prompt/confirm.tsx",
+        "registry/components/prompt/select.tsx",
+        "registry/components/prompt/multi-select.tsx",
+        "registry/components/prompt/number.tsx"
+      ],
+      "dependencies": ["ink", "react"],
+      "tokens": ["colors", "motion", "symbols", "spacing", "typography"]
+    },
+    "error": {
+      "name": "error",
+      "kind": "display",
+      "description": "Rust-compiler-style error blocks",
+      "spec": "specs/error.md",
+      "files": ["registry/components/error.ts"],
+      "dependencies": ["chalk"],
+      "tokens": ["colors", "symbols"]
+    },
+    "spinner": {
+      "name": "spinner",
+      "kind": "interactive",
+      "description": "loading with success/failure resolution",
+      "spec": "specs/spinner.md",
+      "files": ["registry/components/spinner.tsx"],
+      "dependencies": ["ink", "react"],
+      "tokens": ["colors", "motion", "symbols"]
+    },
+    "list": {
+      "name": "list",
+      "kind": "display",
+      "description": "vertical list with bullet/numbered/arrow/dash variants",
+      "spec": "specs/list.md",
+      "files": ["registry/components/list.ts"],
+      "dependencies": ["chalk"],
+      "tokens": ["colors", "symbols"]
+    },
+    "keyValue": {
+      "name": "keyValue",
+      "kind": "display",
+      "description": "aligned key-value pairs for config dumps and summaries",
+      "spec": "specs/key-value.md",
+      "files": ["registry/components/key-value.ts"],
+      "dependencies": ["chalk"],
+      "tokens": ["colors"]
+    },
+    "banner": {
+      "name": "banner",
+      "kind": "display",
+      "description": "heading with simple or box variant",
+      "spec": "specs/banner.md",
+      "files": ["registry/components/banner.ts"],
+      "dependencies": ["chalk"],
+      "tokens": ["colors", "symbols"]
+    },
+    "progress": {
+      "name": "progress",
+      "kind": "display",
+      "description": "horizontal progress bar with percent or count",
+      "spec": "specs/progress.md",
+      "files": ["registry/components/progress.ts"],
+      "dependencies": ["chalk"],
+      "tokens": ["colors", "symbols"]
+    },
+    "step": {
+      "name": "step",
+      "kind": "display",
+      "description": "multi-phase status indicator",
+      "spec": "specs/step.md",
+      "files": ["registry/components/step.ts"],
+      "dependencies": ["chalk"],
+      "tokens": ["colors", "symbols"]
+    },
+    "table": {
+      "name": "table",
+      "kind": "display",
+      "description": "typed columns and rows with optional borders",
+      "spec": "specs/table.md",
+      "files": ["registry/components/table.ts"],
+      "dependencies": ["chalk"],
+      "tokens": ["colors", "symbols"]
+    },
+    "tree": {
+      "name": "tree",
+      "kind": "display",
+      "description": "hierarchical view with box-drawing branches",
+      "files": ["registry/components/tree.ts"],
+      "dependencies": ["chalk"],
+      "tokens": ["colors", "symbols"]
+    },
+    "diff": {
+      "name": "diff",
+      "kind": "display",
+      "description": "unified-diff style line rendering",
+      "files": ["registry/components/diff.ts"],
+      "dependencies": ["chalk"],
+      "tokens": ["colors", "symbols"]
+    },
+    "link": {
+      "name": "link",
+      "kind": "utility",
+      "description": "OSC 8 clickable hyperlink (returns string)",
+      "files": ["registry/components/link.ts"],
+      "dependencies": ["chalk"],
+      "tokens": ["colors"]
+    },
+    "message": {
+      "name": "message",
+      "kind": "display",
+      "description": "info / success / warning single-line messages",
+      "files": ["registry/components/message.ts"],
+      "dependencies": ["chalk"],
+      "tokens": ["colors", "symbols"]
+    },
+    "splash": {
+      "name": "splash",
+      "kind": "interactive",
+      "description": "animated opening with logo, title, and subtitle",
+      "spec": "specs/splash.md",
+      "files": ["registry/components/splash.tsx"],
+      "dependencies": ["ink", "react", "figlet"],
+      "tokens": ["colors", "motion", "symbols"]
+    },
+    "logo": {
+      "name": "logo",
+      "kind": "display",
+      "description": "static ASCII art logo, accept string or text",
+      "spec": "specs/logo.md",
+      "files": ["registry/components/logo.ts"],
+      "dependencies": ["chalk", "figlet"],
+      "tokens": ["colors"]
+    },
+    "typewriter": {
+      "name": "typewriter",
+      "kind": "interactive",
+      "description": "character-by-character text reveal",
+      "spec": "specs/typewriter.md",
+      "files": ["registry/components/typewriter.tsx"],
+      "dependencies": ["ink", "react"],
+      "tokens": ["motion"]
+    },
+    "reveal": {
+      "name": "reveal",
+      "kind": "interactive",
+      "description": "line-by-line text reveal",
+      "spec": "specs/reveal.md",
+      "files": ["registry/components/reveal.tsx"],
+      "dependencies": ["ink", "react"],
+      "tokens": ["motion"]
+    },
+    "boot": {
+      "name": "boot",
+      "kind": "interactive",
+      "description": "systemd-style sequential loader",
+      "spec": "specs/boot.md",
+      "files": ["registry/components/boot.tsx"],
+      "dependencies": ["ink", "react"],
+      "tokens": ["colors", "symbols"]
+    },
+    "divider": {
+      "name": "divider",
+      "kind": "display",
+      "description": "horizontal rule with optional label",
+      "spec": "specs/divider.md",
+      "files": ["registry/components/divider.ts"],
+      "dependencies": ["chalk"],
+      "tokens": ["colors", "symbols"]
+    },
+    "kbd": {
+      "name": "kbd",
+      "kind": "utility",
+      "description": "keyboard shortcut bracketed label",
+      "spec": "specs/kbd.md",
+      "files": ["registry/components/kbd.ts"],
+      "dependencies": ["chalk"],
+      "tokens": ["colors"]
+    },
+    "badge": {
+      "name": "badge",
+      "kind": "utility",
+      "description": "small inline status label",
+      "spec": "specs/badge.md",
+      "files": ["registry/components/badge.ts"],
+      "dependencies": ["chalk"],
+      "tokens": ["colors"]
+    },
+    "paragraph": {
+      "name": "paragraph",
+      "kind": "display",
+      "description": "wrapped multi-line text with optional indent",
+      "spec": "specs/paragraph.md",
+      "files": ["registry/components/paragraph.ts"],
+      "dependencies": [],
+      "tokens": []
+    },
+    "code": {
+      "name": "code",
+      "kind": "utility",
+      "description": "inline code formatting",
+      "spec": "specs/code.md",
+      "files": ["registry/components/code.ts"],
+      "dependencies": ["chalk"],
+      "tokens": []
+    },
+    "quote": {
+      "name": "quote",
+      "kind": "display",
+      "description": "blockquote-style indented text",
+      "spec": "specs/quote.md",
+      "files": ["registry/components/quote.ts"],
+      "dependencies": ["chalk"],
+      "tokens": ["colors", "symbols"]
+    },
+    "clear": {
+      "name": "clear",
+      "kind": "utility",
+      "description": "clear the terminal screen",
+      "spec": "specs/clear.md",
+      "files": ["registry/components/clear.ts"],
+      "dependencies": [],
+      "tokens": []
+    },
+    "form": {
+      "name": "form",
+      "kind": "interactive",
+      "description": "multi-field input layout with tab navigation",
+      "spec": "specs/form.md",
+      "files": ["registry/components/form.tsx"],
+      "dependencies": ["ink", "react"],
+      "tokens": ["colors", "symbols"]
+    },
+    "modal": {
+      "name": "modal",
+      "kind": "interactive",
+      "description": "bordered overlay with action buttons",
+      "spec": "specs/modal.md",
+      "files": ["registry/components/modal.tsx"],
+      "dependencies": ["ink", "react"],
+      "tokens": ["colors", "symbols"]
+    },
+    "toast": {
+      "name": "toast",
+      "kind": "interactive",
+      "description": "auto-dismissing inline notification",
+      "spec": "specs/toast.md",
+      "files": ["registry/components/toast.tsx"],
+      "dependencies": ["ink", "react"],
+      "tokens": ["colors", "symbols"]
+    },
+    "code-block": {
+      "name": "code-block",
+      "kind": "display",
+      "description": "multi-line code block with gutter and line numbers",
+      "spec": "specs/code-block.md",
+      "files": ["registry/components/code-block.ts"],
+      "dependencies": ["chalk"],
+      "tokens": ["colors", "symbols"]
+    },
+    "autocomplete": {
+      "name": "autocomplete",
+      "kind": "interactive",
+      "description": "fuzzy-search prompt over a list of options",
+      "spec": "specs/autocomplete.md",
+      "files": [
+        "registry/components/prompt/autocomplete.tsx"
+      ],
+      "dependencies": ["ink", "react"],
+      "tokens": ["colors", "motion", "symbols", "spacing", "typography"]
+    },
+    "editor": {
+      "name": "editor",
+      "kind": "interactive",
+      "description": "multi-line text editor prompt with line numbers",
+      "spec": "specs/editor.md",
+      "files": [
+        "registry/components/prompt/editor.tsx"
+      ],
+      "dependencies": ["ink", "react"],
+      "tokens": ["colors", "motion", "symbols", "spacing", "typography"]
+    },
+    "log": {
+      "name": "log",
+      "kind": "display",
+      "description": "streaming log output with timestamps and severity levels",
+      "spec": "specs/log.md",
+      "files": ["registry/components/log.ts"],
+      "dependencies": ["chalk"],
+      "tokens": ["colors"]
+    },
+    "columns": {
+      "name": "columns",
+      "kind": "display",
+      "description": "side-by-side column layout for dashboards and comparisons",
+      "spec": "specs/columns.md",
+      "files": ["registry/components/columns.ts"],
+      "dependencies": ["chalk"],
+      "tokens": ["colors", "symbols", "typography"]
+    },
+    "pager": {
+      "name": "pager",
+      "kind": "interactive",
+      "description": "scrollable viewport for long content with keyboard navigation",
+      "spec": "specs/pager.md",
+      "files": ["registry/components/pager.tsx"],
+      "dependencies": ["ink", "react"],
+      "tokens": ["colors", "motion", "typography"]
+    },
+    "search": {
+      "name": "search",
+      "kind": "interactive",
+      "description": "interactive fuzzy search/filter over a dataset",
+      "spec": "specs/search.md",
+      "files": ["registry/components/search.tsx"],
+      "dependencies": ["ink", "react"],
+      "tokens": ["colors", "symbols"]
+    },
+    "panel": {
+      "name": "panel",
+      "kind": "display",
+      "description": "bordered container with optional title",
+      "files": ["registry/components/panel.ts"],
+      "dependencies": ["chalk"],
+      "tokens": ["colors", "symbols"]
+    },
+    "tabs": {
+      "name": "tabs",
+      "kind": "interactive",
+      "description": "tab bar navigation with ←/→ selection",
+      "files": ["registry/components/tabs.tsx"],
+      "dependencies": ["ink", "react"],
+      "tokens": ["colors", "symbols"]
+    },
+    "accordion": {
+      "name": "accordion",
+      "kind": "interactive",
+      "description": "collapsible sections with ↑/↓ navigation",
+      "files": ["registry/components/accordion.tsx"],
+      "dependencies": ["ink", "react"],
+      "tokens": ["colors", "symbols"]
+    },
+    "toggle": {
+      "name": "toggle",
+      "kind": "interactive",
+      "description": "boolean on/off switch with space to toggle",
+      "files": ["registry/components/toggle.tsx"],
+      "dependencies": ["ink", "react"],
+      "tokens": ["colors", "symbols"]
+    },
+    "scrollable": {
+      "name": "scrollable",
+      "kind": "interactive",
+      "description": "scrollable viewport container with scroll indicator",
+      "files": ["registry/components/scrollable.tsx"],
+      "dependencies": ["ink", "react"],
+      "tokens": ["colors", "symbols"]
+    },
+    "jsonViewer": {
+      "name": "jsonViewer",
+      "kind": "display",
+      "description": "syntax-highlighted formatted JSON display",
+      "files": ["registry/components/json-viewer.ts"],
+      "dependencies": ["chalk"],
+      "tokens": ["colors"]
+    },
+    "filePicker": {
+      "name": "filePicker",
+      "kind": "interactive",
+      "description": "interactive file/directory browser",
+      "files": ["registry/components/file-picker.tsx"],
+      "dependencies": ["ink", "react"],
+      "tokens": ["colors", "symbols"]
+    },
+    "slider": {
+      "name": "slider",
+      "kind": "interactive",
+      "description": "numeric range input with ←/→ adjustment",
+      "files": ["registry/components/slider.tsx"],
+      "dependencies": ["ink", "react"],
+      "tokens": ["colors", "symbols"]
+    },
+    "snippet": {
+      "name": "snippet",
+      "kind": "display",
+      "description": "code block with copy-to-clipboard affordance",
+      "files": ["registry/components/snippet.ts"],
+      "dependencies": ["chalk"],
+      "tokens": ["colors", "symbols"]
+    },
+    "commandPalette": {
+      "name": "commandPalette",
+      "kind": "interactive",
+      "description": "fuzzy command search with grouped results",
+      "files": ["registry/components/command-palette.tsx"],
+      "dependencies": ["ink", "react"],
+      "tokens": ["colors", "symbols"]
+    },
+    "contextMenu": {
+      "name": "contextMenu",
+      "kind": "interactive",
+      "description": "bordered action menu with separator support",
+      "files": ["registry/components/context-menu.tsx"],
+      "dependencies": ["ink", "react"],
+      "tokens": ["colors", "symbols"]
+    },
+    "calendar": {
+      "name": "calendar",
+      "kind": "display",
+      "description": "month-view calendar with today/marked highlights",
+      "files": ["registry/components/calendar.ts"],
+      "dependencies": ["chalk"],
+      "tokens": ["colors"]
+    },
+    "heatmap": {
+      "name": "heatmap",
+      "kind": "display",
+      "description": "grid-based heatmap with block characters",
+      "files": ["registry/components/heatmap.ts"],
+      "dependencies": ["chalk"],
+      "tokens": ["colors"]
+    },
+    "avatar": {
+      "name": "avatar",
+      "kind": "utility",
+      "description": "initials-based user representation",
+      "files": ["registry/components/avatar.ts"],
+      "dependencies": ["chalk"],
+      "tokens": ["colors"]
+    },
+    "splitPane": {
+      "name": "splitPane",
+      "kind": "interactive",
+      "description": "side-by-side scrollable layout with tab focus",
+      "files": ["registry/components/split-pane.tsx"],
+      "dependencies": ["ink", "react"],
+      "tokens": ["colors", "symbols"]
+    },
+    "virtualizedList": {
+      "name": "virtualizedList",
+      "kind": "interactive",
+      "description": "windowed scrollable list for large datasets",
+      "files": ["registry/components/virtualized-list.tsx"],
+      "dependencies": ["ink", "react"],
+      "tokens": ["colors", "symbols"]
+    }
+  },
+  "tokens": {
+    "colors": {
+      "description": "Caret color palette authored in Helmlab, compiled to sRGB",
+      "files": ["registry/tokens/colors.ts"],
+      "status": "draft — awaiting design confirmation"
+    },
+    "motion": {
+      "description": "Durations and easings for micro-interactions",
+      "files": ["registry/tokens/motion.ts"],
+      "status": "decided"
+    },
+    "symbols": {
+      "description": "Caret's character vocabulary",
+      "files": ["registry/tokens/symbols.ts"],
+      "status": "decided"
+    },
+    "spacing": {
+      "description": "Character-grid spacing scale",
+      "files": ["registry/tokens/spacing.ts"],
+      "status": "decided"
+    },
+    "typography": {
+      "description": "Semantic attribute roles (bold, dim, italic combinations)",
+      "files": ["registry/tokens/typography.ts"],
+      "status": "decided"
+    }
+  },
+  "theme": {
+    "description": "Composed default theme + types + provider + global accessor",
+    "files": [
+      "registry/theme/types.ts",
+      "registry/theme/default.ts",
+      "registry/theme/merge.ts",
+      "registry/theme/global.ts",
+      "registry/theme/context.tsx",
+      "registry/theme/index.ts"
+    ]
+  },
+  "lib": {
+    "description": "Runtime utilities used by components",
+    "files": [
+      "registry/lib/capability.ts",
+      "registry/lib/notify.ts",
+      "registry/lib/paint.ts"
+    ]
+  }
+}

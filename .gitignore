@@ -1,0 +1,26 @@
+node_modules/
+dist/
+build/
+*.log
+.DS_Store
+.env
+.env.*
+!.env.example
+*.tsbuildinfo
+coverage/
+.turbo/
+.cache/
+.pnpm-store/
+.mcp.json
+
+# Caret image-to-art caches (regenerable)
+*.cache.txt
+*.caret-cache.txt
+**/.*.caret-cache.txt
+
+# `prepack` copies the workspace registry + README + LICENSE into
+# packages/caret/ for the published tarball — never commit those copies.
+packages/caret/registry/
+packages/caret/README.md
+packages/caret/LICENSE
+

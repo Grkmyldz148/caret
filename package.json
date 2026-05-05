@@ -1,0 +1,31 @@
+{
+  "name": "caret-monorepo",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Caret — the design system for modern command-line tools",
+  "license": "MIT",
+  "author": "Görkem Yıldız",
+  "homepage": "https://caret.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Grkmyldz148/caret"
+  },
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "pnpm -r --parallel dev",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "demo": "pnpm --filter @caret/examples demo",
+    "kitchen": "pnpm --filter @caret/examples kitchen",
+    "fake-deploy": "pnpm --filter @caret/examples fake-deploy"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  },
+  "packageManager": "pnpm@9.12.0"
+}
